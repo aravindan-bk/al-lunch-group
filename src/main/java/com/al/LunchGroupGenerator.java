@@ -38,6 +38,11 @@ public class LunchGroupGenerator {
         List<String> currentGroup = new LinkedList<>();
         while(sizeCounter > 0){
 
+            /**
+             * We make the best effort to distribute the groups into 5, to minimize table usage.
+             * When the group size gets around 8 we start being cautious to not leave anybody out as well as get the minimum
+             * number of groups possible.
+             */
             if(sizeCounter==8 || sizeCounter == 7 || sizeCounter == 6 || sizeCounter == 3){
                 groupSize = 3;
             }
