@@ -25,5 +25,7 @@
 6. Now, build the code as follows: "mvn clean package"
 
 7. Execute the project as follows:
+
 "java -jar target/lunch-group-selector-1.0-SNAPSHOT.jar /user/aravindan/Desktop/app.properties"
+
  Note: Here the app.properties location should point to where you have saved it in step 4.
