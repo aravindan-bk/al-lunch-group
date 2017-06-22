@@ -1,5 +1,9 @@
 package com.al;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 
 /**
@@ -11,9 +15,15 @@ public class Driver {
     public static void main(String[] args){
 
 
-        String fileUri = "/Users/arthulas/Desktop/employees.txt";
-        String outputLocation = "/Users/arthulas/Desktop";
+        if(args.length < 1){
+            System.out.println("Please call the jar as: java -jar <LOCATION_OF_JAR_FILE>/lunch-group-selector-1.0-SNAPSHOT.jar  <URI OF PROPERTY FILE>");
+        }
+        String propertyFileUri = args[0];
+        Properties prop = loadProperties(propertyFileUri);
+        String fileUri = prop.getProperty("employee.list.file");
+        String outputLocation = prop.getProperty("group.file.output.folder");
 
+        System.out.println(fileUri);
 
         FileUtil fileUtil = new FileUtil(outputLocation);
 
@@ -45,11 +55,33 @@ public class Driver {
             }
         }
 
-
-
-
-
     }
-    
+
+    private static Properties loadProperties(String propertyFileUri) {
+        InputStream input = null;
+        Properties prop = new Properties();
+        try {
+
+            input = new FileInputStream(new File(propertyFileUri));
+            prop.load(input);
+
+        } catch (IOException ex) {
+            System.out.println("Couldn't load properties file. Exiting....");
+            System.exit(0);
+        } finally {
+            if (input != null) {
+                try {
+                    input.close();
+                } catch (IOException e) {
+                    System.out.println("Couldn't close properties file. Exiting....");
+                    System.exit(0);
+                }
+            }
+        }
+
+        return prop;
+    }
+
 
 }
+

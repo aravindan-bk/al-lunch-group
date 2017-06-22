@@ -49,7 +49,8 @@ public class FileUtil {
 
 
         try {
-            FileWriter fw = new FileWriter(outputFolderUri+"/"+fileName+"_"+System.currentTimeMillis());
+            String outputFileUri = outputFolderUri+"/"+fileName+"_"+System.currentTimeMillis();
+            FileWriter fw = new FileWriter(outputFileUri);
             int groupCounter = 0;
             for(List<String> eachGroup : groupList){
                 groupCounter++;
@@ -64,6 +65,7 @@ public class FileUtil {
             }
 
             fw.close();
+            System.out.println("You can find the group distribution file here: "+ outputFileUri);
         } catch (IOException e) {
             System.out.println("Issue writing file to Location: " + outputFolderUri);
             System.out.println("Please check if the location is valid and try again");
